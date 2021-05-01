@@ -20,13 +20,13 @@ Tyle.DbConnect("localhost");
 Now you can start Web3 :
 ```c#
 Tyle.StartWeb3("Your api key (i.e. infuria)", "your wallet secret");
-### Deploy the contract
 ```
+### Deploy the contract
 If you do not have a contract you can deploy it :
 ```c#
 var address = Tyle.DeployContract().Result;
-### Mint the nft
 ```
+### Mint the nft
 Now that you have a smart contract you can mint all the nft you want , like this :
 ```c#
 var modelUri = Tyle.ss.StoreModel("c:/Users/Pc/Desktop/cube.fbx");
@@ -40,8 +40,8 @@ var token = new nft_token()
         };
 
 Tyle.Mint(address, token,"http://localhost:5000").Wait();
-#### Web api controller
 ```
+#### Web api controller
 In this case I store also the model of the cube in ipfs (you have to run it locally)
 The apihost of the Mint function is the url to the api , you can make the controller 
 in your web api like this :
