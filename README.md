@@ -58,6 +58,12 @@ namespace MyService
     }
 }
 ```
+You can retrieve your token object and also tokenId like this :
+```c#
+Dictionary<int, nft_token> d = Tyle.GetTokenList<nft_token>(address).Result;
+int tokenid = d.FirstOrDefault(token => token.Value.name == "Cube").Key;
+```
+
 At this point you can have your grpc service up and running and call all the procedures remotely , like rotating the cube for example.
 If you don't want to have real-time data you can omit the db and use the StoreJson method to save the token data off-chain (still with ipfs).
 
