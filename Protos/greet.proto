@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService1";
+
+package cube;
+
+// The greeting service definition.
+service Cube {
+  // Sends a greeting
+  rpc Rotate (RotateRequest) returns (RotateReply);
+}
+
+// The request message containing the user's name.
+message RotateRequest {
+  string address = 1;
+  uint64 tokenid = 2;
+  float y = 3;
+}
+
+// The response message containing the greetings.
+message RotateReply {
+  float y = 1;
+}
