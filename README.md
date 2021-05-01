@@ -39,7 +39,7 @@ var token = new nft_token()
             rotation = new nft_token.quaternion { x = 0, y = 0, z = 0, w = 0 }
         };
 
-Tyle.Mint(address, token,"http://localhost:5000").Wait();
+Tyle.Mint(address, token,"https://localhost:5001").Wait();
 ```
 #### Web api controller
 In this case I store also the model of the cube in ipfs (you have to run it locally)
