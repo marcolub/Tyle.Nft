@@ -39,7 +39,7 @@ var token = new nft_token()
             rotation = new nft_token.quaternion { x = 0, y = 0, z = 0, w = 0 }
         };
 
-Tyle.Mint(address, token,"https://localhost:5001").Wait();
+Tyle.Mint(address, token,"https://localhost:5001").Wait(); // Will save data off-chain
 ```
 #### Web api controller
 In this case I store also the model of the cube in ipfs (you have to run it locally)
@@ -65,6 +65,6 @@ int tokenid = d.FirstOrDefault(token => token.Value.name == "Cube").Key;
 ```
 
 At this point you can have your grpc service up and running and call all the procedures remotely , like rotating the cube for example.
-If you don't want to have real-time data you can omit the db and use the StoreJson method to save the token data off-chain (still with ipfs).
+If you don't want to have real-time data you can omit the db and use the Mint method without passing the apiurl.
 
 Also if you want to serialize/deserialize data you can call ToByteArray and FromByteArray from Tyle.Nft.Byte (Note that not all the objects are serializable).
