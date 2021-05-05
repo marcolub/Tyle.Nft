@@ -27,13 +27,13 @@ Tyle.DbConnect("localhost");
 Now you can start Web3 :
 ```c#
 Tyle.StartWeb3("Your api key (i.e. infuria)", "your wallet secret");
-### Deploy the contract
 ```
+### Deploy the contract
 If you do not have a contract you can deploy it :
 ```c#
 var address = Tyle.DeployContract().Result;
-### Mint the nft
 ```
+### Mint the nft
 Now that you have a smart contract you can mint all the nft you want , like this :
 ```c#
 var modelUri = Tyle.ss.StoreModel("c:/Users/Pc/Desktop/cube.fbx");
@@ -49,6 +49,7 @@ var token = new nft_token()
 Tyle.Mint(address, token,"https://tylegroup.com/api/Token1").Wait(); // Will save data off-chain
 #### Web api controller
 ```
+#### Web api controller
 In this case I store also the model of the cube in ipfs (you have to run it locally)
 The apihost of the Mint function is the url to the api , you can make the controller 
 in your web api like this :
@@ -68,7 +69,13 @@ namespace MyService
     }
 }
 ```
+You can retrieve your token object and also tokenId like this :
+```c#
+Dictionary<int, nft_token> d = Tyle.GetTokenList<nft_token>(address).Result;
+int tokenid = d.FirstOrDefault(token => token.Value.name == "Cube").Key;
+```
+
 At this point you can have your grpc service up and running and call all the procedures remotely , like rotating the cube for example.
-If you don't want to have real-time data you can omit the db and call the Mint method without the api url.
+If you don't want to have real-time data you can omit the db and use the Mint method without passing the apiurl.
 
 Also if you want to serialize/deserialize data you can call ToByteArray and FromByteArray from Tyle.Nft.Byte (Note that not all the objects are serializable).
