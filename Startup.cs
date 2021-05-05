@@ -7,17 +7,30 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Tyle.Nft.Api;
 
 namespace GrpcService1
 {
     public class Startup
     {
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("*")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
             services.AddMvc().AddNewtonsoftJson();
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddScoped<Token1Controller>();
             services.AddGrpc();
         }
 
@@ -30,6 +43,8 @@ namespace GrpcService1
             }
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

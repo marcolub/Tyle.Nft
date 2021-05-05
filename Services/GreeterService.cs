@@ -8,8 +8,6 @@ using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Tyle.Nft;
 
-using UnityEngine;
-
 namespace GrpcService1
 {
     public class CubeService : Cube.CubeBase
@@ -22,8 +20,9 @@ namespace GrpcService1
 
         public override Task<RotateReply> Rotate(RotateRequest request, ServerCallContext context)
         {
+            
             var client = new Client();
-            client.DbConnect("localhost");
+            client.DbConnect("YOUR DB HOST");
             var token = client.db.GetToken(request.Address, request.Tokenid).o;
             if (token.rotation.y >= 360)
                 token.rotation.y = 0;

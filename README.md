@@ -8,6 +8,13 @@ Tyle.Nft is simply a library to work with nft and real-time database.
 In this example I built a grpc service to communicate with the client and rotate a cube.
 The rotation is stored in a nft , the token uri redirects to the api interfacing with rethinkdb.
 
+## Run
+Replace with your db host in the controller and the service.
+You can publish to docker hub from visual studio then run :
+```bash
+docker run -p 5001:5001 -p 5000:5000 MyService
+```
+
 ## Usage
 
 ### Start Tyle.Nft
@@ -39,7 +46,7 @@ var token = new nft_token()
             rotation = new nft_token.quaternion { x = 0, y = 0, z = 0, w = 0 }
         };
 
-Tyle.Mint(address, token,"http://localhost:5000").Wait();
+Tyle.Mint(address, token,"https://tylegroup.com/api/Token1").Wait(); // Will save data off-chain
 #### Web api controller
 ```
 In this case I store also the model of the cube in ipfs (you have to run it locally)
@@ -50,15 +57,18 @@ using Tyle.Nft.Api;
 namespace MyService
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/[controller]")]
     public class Token1Controller : TokenController
     {
+        public Token1Controller():base("YOUR DB HOST")
+        {
 
+        }
 
     }
 }
 ```
 At this point you can have your grpc service up and running and call all the procedures remotely , like rotating the cube for example.
-If you don't want to have real-time data you can omit the db and use the StoreJson method to save the token data off-chain (still with ipfs).
+If you don't want to have real-time data you can omit the db and call the Mint method without the api url.
 
 Also if you want to serialize/deserialize data you can call ToByteArray and FromByteArray from Tyle.Nft.Byte (Note that not all the objects are serializable).
