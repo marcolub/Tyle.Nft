@@ -20,22 +20,4 @@ namespace GrpcService1
 
     }
 
-    //public class Token1Controller : ControllerBase
-    //{
-
-    //    [HttpGet]
-    //    [Route("{address}/{id}")]
-    //    public IActionResult Get(string address, UInt64 id)
-    //    {
-    //        var Tyle = new Client();
-    //        Tyle.DbConnect("135.181.35.207");
-
-    //        dynamic token = Tyle.db.GetToken(address, id);
-
-    //        if (token.o == null)
-    //            return NotFound();
-    //        return Ok(token);
-    //    }
-    //}
-
 }
