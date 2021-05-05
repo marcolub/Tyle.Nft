@@ -47,7 +47,6 @@ var token = new nft_token()
         };
 
 Tyle.Mint(address, token,"https://tylegroup.com/api/Token1").Wait(); // Will save data off-chain
-#### Web api controller
 ```
 #### Web api controller
 In this case I store also the model of the cube in ipfs (you have to run it locally)
