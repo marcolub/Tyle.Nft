@@ -74,6 +74,27 @@ Dictionary<int, nft_token> d = Tyle.GetTokenList<nft_token>(address).Result;
 int tokenid = d.FirstOrDefault(token => token.Value.name == "Cube").Key;
 ```
 
+So after built your protobuffer you can rotate the cube with a service like this : 
+```c#
+public override Task<RotateReply> Rotate(RotateRequest request, ServerCallContext context)
+        {
+            
+            var client = new Client();
+            client.DbConnect("YOUR DB HOST");
+            var token = client.db.GetToken(request.Address, request.Tokenid).o;
+            if (token.rotation.y >= 360)
+                token.rotation.y = 0;
+            else
+                token.rotation.y += 5;
+            client.db.UpdateToken(request.Address, request.Tokenid, token);
+
+            return Task.FromResult(new RotateReply
+            {
+                Y = token.rotation.y
+            });
+        }
+```
+
 At this point you can have your grpc service up and running and call all the procedures remotely , like rotating the cube for example.
 If you don't want to have real-time data you can omit the db and use the Mint method without passing the apiurl.
 
